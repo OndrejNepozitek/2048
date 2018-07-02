@@ -157,7 +157,23 @@
 
 		public List<Move> GetPossibleMoves(ulong state)
 		{
-			throw new System.NotImplementedException();
+			var moves = new List<Move>();
+
+			foreach (var m in possibleMoves)
+			{
+
+				if (m == Move.Undefined)
+				{
+					continue;
+				}
+
+				if (state != PlayMove(state, m))
+				{
+					moves.Add(m);
+				}
+			}
+
+			return moves;
 		}
 
 		public ulong GenerateRandomTile(ulong state)

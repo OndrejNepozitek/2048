@@ -4,7 +4,9 @@
 	using System.Collections.Generic;
 	using System.Drawing;
 	using System.Globalization;
+	using System.Threading.Tasks;
 	using System.Windows.Forms;
+	using The2048.AI;
 	using The2048.Game;
 
 	public partial class GameWindow : Form
@@ -25,7 +27,6 @@
 			"3c3a32", "3c3a32", "3c3a32", "3c3a32",
 		};
 
-
 		public GameWindow(bool manual = true)
 		{
 			this.manual = manual;
@@ -40,16 +41,40 @@
 				{Keys.Left, The2048.Game.Move.Left}
 			};
 
-			if (manual)
-			{
-				InitManualPlay();
-			}
+			//if (manual)
+			//{
+			//	InitManualPlay();
+			//}
+
+			InitSimulation(new MonteCarloPureSearch());
 		}
 
 		private void InitManualPlay()
 		{
 			state = board.GenerateRandomTile(0);
 			DrawState(state);
+		}
+
+		private void InitSimulation(ISolver solver)
+		{
+			Task.Run(() =>
+			{
+				var simulationState = board.GenerateRandomTile(0);
+
+				while (!board.IsTerminal(simulationState))
+				{
+					var move = solver.GetBestMove(simulationState);
+					simulationState = board.PlayAndGenerate(simulationState, move);
+					state = simulationState;
+
+					BeginInvoke((Action)(() =>
+					{
+						
+						DrawState(state);
+						UpdateScore();
+					}));
+				}
+			});
 		}
 
 		private void CreateTiles()

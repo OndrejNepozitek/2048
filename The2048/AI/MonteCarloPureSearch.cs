@@ -6,12 +6,12 @@
 	public class MonteCarloPureSearch : ISolver
 	{
 		private readonly IBoard board = new Board();
-		private int randomWalksCount = 1000;
-		private readonly Random random;
+		private int randomWalksCount = 1500;
+		private readonly Random random = new Random();
 
 		public Move GetBestMove(ulong state)
 		{
-			var bestMove = Move.Undefined; // Default state?
+			var bestMove = Move.Undefined;
 			ulong bestScore = 0;
 
 			if (board.IsTerminal(state))
@@ -40,7 +40,7 @@
 
 			for (var i = 0; i < randomWalksCount; i++)
 			{
-				var stateBackup = board.GenerateRandomTile(state);
+				var stateBackup = board.GenerateRandomTile(stateAfterMove);
 
 				while (!board.IsTerminal(stateBackup))
 				{
