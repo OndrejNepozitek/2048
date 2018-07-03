@@ -30,6 +30,7 @@
 		{
 			this.boardContainer = new System.Windows.Forms.Panel();
 			this.scoreLabel = new System.Windows.Forms.Label();
+			this.nameLabel = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// boardContainer
@@ -49,11 +50,22 @@
 			this.scoreLabel.TabIndex = 1;
 			this.scoreLabel.Text = "Score: 0";
 			// 
+			// nameLabel
+			// 
+			this.nameLabel.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.nameLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.nameLabel.Location = new System.Drawing.Point(281, 22);
+			this.nameLabel.Name = "nameLabel";
+			this.nameLabel.Size = new System.Drawing.Size(335, 23);
+			this.nameLabel.TabIndex = 2;
+			this.nameLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
 			// GameWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(632, 683);
+			this.Controls.Add(this.nameLabel);
 			this.Controls.Add(this.scoreLabel);
 			this.Controls.Add(this.boardContainer);
 			this.Name = "GameWindow";
@@ -67,5 +79,6 @@
 
 		private System.Windows.Forms.Panel boardContainer;
 		private System.Windows.Forms.Label scoreLabel;
+		private System.Windows.Forms.Label nameLabel;
 	}
 }

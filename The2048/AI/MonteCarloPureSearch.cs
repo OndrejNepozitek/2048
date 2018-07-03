@@ -6,8 +6,13 @@
 	public class MonteCarloPureSearch : ISolver
 	{
 		private readonly IBoard board = new Board();
-		private int randomWalksCount = 1500;
+		private readonly int randomWalksCount;
 		private readonly Random random = new Random();
+
+		public MonteCarloPureSearch(int randomWalksCount)
+		{
+			this.randomWalksCount = randomWalksCount;
+		}
 
 		public Move GetBestMove(ulong state)
 		{
@@ -48,9 +53,10 @@
 					var randomMove = possibleMoves.GetRandom(random);
 
 					stateBackup = board.PlayAndGenerate(stateBackup, randomMove);
+					scoreSum++;
 				}
 
-				scoreSum += board.GetScore(stateBackup);
+				// scoreSum += board.GetScore(stateBackup);
 			}
 
 			return scoreSum;

@@ -11,12 +11,12 @@
 
 	public partial class GameWindow : Form
 	{
-		private Label[] labels = new Label[16];
-		private readonly bool manual;
+		protected Label[] labels = new Label[16];
 
-		private readonly IBoard board = new Board();
-		private ulong state = 0;
-		private Dictionary<Keys, Move> keyToMoveMapping;
+		protected readonly IBoard board = new Board();
+		protected ulong state = 0;
+		protected Dictionary<Keys, Move> keyToMoveMapping;
+		protected Mode mode;
 
 		// Tile colors
 		private readonly string[] tileBackColors =
@@ -27,9 +27,9 @@
 			"3c3a32", "3c3a32", "3c3a32", "3c3a32",
 		};
 
-		public GameWindow(bool manual = true)
+		public GameWindow(Mode mode)
 		{
-			this.manual = manual;
+			this.mode = mode;
 			InitializeComponent();
 			CreateTiles();
 
@@ -46,7 +46,7 @@
 			//	InitManualPlay();
 			//}
 
-			InitSimulation(new MonteCarloPureSearch());
+			// InitSimulation(new MonteCarloPureSearch(200));
 		}
 
 		private void InitManualPlay()
@@ -71,7 +71,7 @@
 					{
 						
 						DrawState(state);
-						UpdateScore();
+						UpdateScore(state);
 					}));
 				}
 			});
@@ -169,14 +169,24 @@
 
 			state = board.PlayAndGenerate(state, move);
 			DrawState(state);
-			UpdateScore();
+			UpdateScore(state);
 		}
 
-		private void UpdateScore()
+		protected void UpdateScore(ulong state)
 		{
 			var score = board.GetScore(state);
 			scoreLabel.Text = $"Score: {score}";
 			scoreLabel.Refresh();
+		}
+
+		protected void UpdateName(string name)
+		{
+			nameLabel.Text = name;
+		}
+
+		public enum Mode
+		{
+			Mode, Simulation, Readonly
 		}
 	}
 }
