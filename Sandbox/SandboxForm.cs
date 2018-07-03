@@ -5,6 +5,8 @@
 	using System.Threading.Tasks;
 	using GUI;
 	using The2048.AI;
+	using The2048.AI.MonteCarlo;
+	using The2048.AI.MonteCarlo.Modes;
 	using The2048.Benchmarks;
 
 	public partial class SandboxForm : GameWindow
@@ -25,9 +27,10 @@
 				var benchmark = new Benchmark();
 				var scenario = new BenchmarkScenario();
 
-				for (var i = 1; i < 11; i++)
+				for (var i = 1; i < 10; i++)
 				{
-					scenario.AddSetup($"MonteCarlo {i * 100} iters", new MonteCarloPureSearch(i * 100));
+					scenario.AddSetup($"MonteCarlo {i * 400} iters", new MonteCarloPureSearch(new FixedCountMode(i * 400)));
+					// scenario.AddSetup($"MonteCarlo {i * 400} iters", new MonteCarloPureSearch(new TimeMode(50)));
 				}
 
 				benchmark.OnSetupStarted += (name) =>
@@ -40,7 +43,7 @@
 
 				benchmark.OnMoveGenerated += (newState, move) =>
 				{
-					if (timer.ElapsedMilliseconds >= 500)
+					if (timer.ElapsedMilliseconds >= 20)
 					{
 						BeginInvoke((Action)(() =>
 						{
@@ -53,7 +56,7 @@
 					}
 				};
 
-				benchmark.Execute(scenario, 10);
+				benchmark.Execute(scenario, 30);
 			});
 		}
 	}

@@ -8,7 +8,7 @@
 		private ushort[] movesTableRight;
 		private ushort[] movesTableLeft;
 		private uint[] scoresTable;
-		private Random random = new Random();
+		private Random random = new Random(0);
 
 		private readonly Move[] possibleMoves =
 		{

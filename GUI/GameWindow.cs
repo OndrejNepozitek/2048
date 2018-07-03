@@ -7,6 +7,8 @@
 	using System.Threading.Tasks;
 	using System.Windows.Forms;
 	using The2048.AI;
+	using The2048.AI.MonteCarlo;
+	using The2048.AI.MonteCarlo.Modes;
 	using The2048.Game;
 
 	public partial class GameWindow : Form
@@ -46,7 +48,7 @@
 			//	InitManualPlay();
 			//}
 
-			// InitSimulation(new MonteCarloPureSearch(200));
+			//InitSimulation(new MonteCarloPureSearch(new FixedCountMode(400)));
 		}
 
 		private void InitManualPlay()
@@ -67,13 +69,18 @@
 					simulationState = board.PlayAndGenerate(simulationState, move);
 					state = simulationState;
 
-					BeginInvoke((Action)(() =>
+					Invoke((Action)(() =>
 					{
 						
 						DrawState(state);
 						UpdateScore(state);
 					}));
 				}
+
+				Invoke((Action) (() =>
+				{
+					InitSimulation(new MonteCarloPureSearch(new FixedCountMode(400)));
+				}));
 			});
 		}
 
