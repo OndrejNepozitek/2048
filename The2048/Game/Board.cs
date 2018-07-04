@@ -69,24 +69,6 @@
 		}
 
 		/// <summary>
-		/// Efficient transposition using bitwise operations.
-		/// </summary>
-		/// <param name="state">Current state</param>
-		/// <returns>Transposed state</returns>
-		private ulong Transpose(ulong state)
-		{
-			var a1 = state & 0xF0F00F0FF0F00F0FL;
-			var a2 = state & 0x0000F0F00000F0F0L;
-			var a3 = state & 0x0F0F00000F0F0000L;
-			var a = a1 | (a2 << 12) | (a3 >> 12);
-			var b1 = a & 0xFF00FF0000FF00FFL;
-			var b2 = a & 0x00FF00FF00000000L;
-			var b3 = a & 0x00000000FF00FF00L;
-
-			return b1 | (b2 >> 24) | (b3 << 24);
-		}
-
-		/// <summary>
 		/// Shifts all tiles in the row to the right side.
 		/// </summary>
 		/// <param name="row">Row consisting of 4 tiles</param>
@@ -139,7 +121,7 @@
 
 			if (move == Move.Up || move == Move.Down)
 			{
-				state = Transpose(state);
+				state = Helpers.Transpose(state);
 			}
 
 			state = movesTable[(int)(state & 0xFFFF)]
@@ -149,7 +131,7 @@
 
 			if (move == Move.Up || move == Move.Down)
 			{
-				state = Transpose(state);
+				state = Helpers.Transpose(state);
 			}
 
 			return state;

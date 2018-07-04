@@ -5,6 +5,7 @@
 	using System.Threading.Tasks;
 	using GUI;
 	using The2048.AI;
+	using The2048.AI.ExpectiMax;
 	using The2048.AI.MonteCarlo;
 	using The2048.AI.MonteCarlo.Modes;
 	using The2048.Benchmarks;
@@ -27,11 +28,13 @@
 				var benchmark = new Benchmark();
 				var scenario = new BenchmarkScenario();
 
-				for (var i = 1; i < 10; i++)
-				{
-					scenario.AddSetup($"MonteCarlo {i * 400} iters", new MonteCarloPureSearch(new FixedCountMode(i * 400)));
-					// scenario.AddSetup($"MonteCarlo {i * 400} iters", new MonteCarloPureSearch(new TimeMode(50)));
-				}
+				//for (var i = 1; i < 10; i++)
+				//{
+				//	scenario.AddSetup($"MonteCarlo {i * 400} iters", new MonteCarloPureSearch(new FixedCountMode(i * 400)));
+				//	// scenario.AddSetup($"MonteCarlo {i * 400} iters", new MonteCarloPureSearch(new TimeMode(50)));
+				//}
+
+				scenario.AddSetup("ExpectiMax", new ExpectiMax());
 
 				benchmark.OnSetupStarted += (name) =>
 				{
