@@ -1,24 +1,28 @@
 ﻿namespace The2048.Game
 {
 	using System.Collections.Generic;
+	using System.Linq;
 
-	public static class Helpers
+	/// <summary>
+	/// Helper methods for board state.
+	/// </summary>
+	public static class BoardStateHelpers
 	{
+		/// <summary>
+		/// Gets a max tile of a given state.
+		/// </summary>
+		/// <param name="state"></param>
+		/// <returns></returns>
 		public static byte GetMaxTile(ulong state)
 		{
-			byte max = 0;
-
-			foreach (var tile in GetTiles(state))
-			{
-				if (tile > max)
-				{
-					max = tile;
-				}
-			}
-
-			return max;
+			return GetTiles(state).Max();
 		}
 
+		/// <summary>
+		/// Gets all tiles of a given state.
+		/// </summary>
+		/// <param name="state"></param>
+		/// <returns></returns>
 		public static IEnumerable<byte> GetTiles(ulong state)
 		{
 			for (var i = 0; i < 16; i++)
@@ -29,7 +33,7 @@
 		}
 
 		/// <summary>
-		/// Efficient transposition using bitwise operations.
+		/// Efficient board transposition using bitwise operations.
 		/// </summary>
 		/// <param name="state">Current state</param>
 		/// <returns>Transposed state</returns>

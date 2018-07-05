@@ -3,6 +3,9 @@
 	using System;
 	using System.Linq;
 
+	/// <summary>
+	/// Collection of useful heuristics.
+	/// </summary>
 	public static class HeuristicsHelpers
 	{
 		public static double LineMonotony(byte[] row, double power)

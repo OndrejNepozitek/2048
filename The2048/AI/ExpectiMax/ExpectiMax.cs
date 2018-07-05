@@ -5,19 +5,24 @@
 	using AI.Heuristics;
 	using Game;
 
+	/// <summary>
+	/// ExpectiMax strategy.
+	/// https://en.wikipedia.org/wiki/Expectiminimax_tree
+	/// </summary>
 	public class ExpectiMax : ISolver
 	{
 		private readonly int maxDepth = 8;
 		private Dictionary<ulong, double> previouslySeenStates;
-		private IBoard board = new Board();
-		private IHeuristics heuristics = new Heuristics();
+		private readonly IBoard board = new Board();
+		private readonly IHeuristics heuristics = new Heuristics();
 
 		private readonly Move[] possibleMoves =
 		{
 			Move.Up, Move.Down, Move.Left, Move.Right
 		};
 
-		public Move GetBestMove(ulong state)
+		/// <inheritdoc />
+		public Move GetNextMove(ulong state)
 	    {
 			previouslySeenStates = new Dictionary<ulong, double>();
 
@@ -46,6 +51,13 @@
 		    return bestMove;
 	    }
 
+		/// <summary>
+		/// Evaluates a given node.
+		/// </summary>
+		/// <param name="state"></param>
+		/// <param name="depth"></param>
+		/// <param name="probability"></param>
+		/// <returns></returns>
 	    private double EvaluateNode(ulong state, int depth, double probability)
 	    {
 			if (depth > maxDepth)
@@ -77,6 +89,13 @@
 		    return score;
 	    }
 
+		/// <summary>
+		/// Returns the average score of all possible nodes created by filling a random empty tile.
+		/// </summary>
+		/// <param name="state"></param>
+		/// <param name="depth"></param>
+		/// <param name="probability"></param>
+		/// <returns></returns>
 	    private double EvaluateRandomNode(ulong state, int depth, double probability)
 	    {
 		    var score = 0d;
@@ -104,6 +123,13 @@
 		    return avgScore;
 	    }
 
+		/// <summary>
+		/// Returns the score of the best move available from a given state.
+		/// </summary>
+		/// <param name="state"></param>
+		/// <param name="depth"></param>
+		/// <param name="probability"></param>
+		/// <returns></returns>
 	    private double EvaluateMoveNode(ulong state, int depth, double probability)
 	    {
 		    var bestScore = double.MinValue;
@@ -124,14 +150,14 @@
 			    }
 		    }
 
-		    if (bestScore == double.MinValue)
-		    {
-				throw new InvalidOperationException();
-		    }
-
 		    return bestScore;
 	    }
 
+		/// <summary>
+		/// Evaluates a given state.
+		/// </summary>
+		/// <param name="state"></param>
+		/// <returns></returns>
 	    private double EvaluateState(ulong state)
 	    {
 		    return board.IsTerminal(state) ? 0 : heuristics.EvaluateState(state);

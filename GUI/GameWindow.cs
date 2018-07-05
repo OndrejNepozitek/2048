@@ -65,7 +65,7 @@
 
 				while (!board.IsTerminal(simulationState))
 				{
-					var move = solver.GetBestMove(simulationState);
+					var move = solver.GetNextMove(simulationState);
 					simulationState = board.PlayAndGenerate(simulationState, move);
 					state = simulationState;
 
@@ -193,7 +193,7 @@
 
 		public enum Mode
 		{
-			Mode, Simulation, Readonly
+			Manual, Simulation, Readonly
 		}
 	}
 }

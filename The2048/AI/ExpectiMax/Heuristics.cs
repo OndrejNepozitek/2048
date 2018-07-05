@@ -2,6 +2,9 @@
 {
 	using AI.Heuristics;
 
+	/// <summary>
+	/// Heuristic functions for ExpectiMax.
+	/// </summary>
 	public class Heuristics : AbstractHeuristics
 	{
 		public Heuristics()

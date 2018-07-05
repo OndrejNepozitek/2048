@@ -78,14 +78,14 @@
 
 				while (!board.IsTerminal(state))
 				{
-					var move = solver.GetBestMove(state);
+					var move = solver.GetNextMove(state);
 					movesCount++;
 					state = board.PlayAndGenerate(state, move);
 
 					OnMoveGenerated?.Invoke(state, move);
 				}
 
-				var maxTile = Helpers.GetMaxTile(state);
+				var maxTile = BoardStateHelpers.GetMaxTile(state);
 
 				for (var j = (int) maxTile; j >= 0; j--)
 				{

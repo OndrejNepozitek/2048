@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace GUI
+﻿namespace GUI
 {
+	using System;
+	using System.Windows.Forms;
+
 	static class Program
 	{
 		/// <summary>
@@ -16,7 +13,7 @@ namespace GUI
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new GameWindow(GameWindow.Mode.Readonly));
+			Application.Run(new GameWindow(GameWindow.Mode.Manual));
 		}
 	}
 }

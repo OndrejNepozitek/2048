@@ -1,7 +1,7 @@
 ﻿namespace The2048.AI.MonteCarlo.Modes
 {
-	public interface IMode
-	{
-		
-	}
+	/// <summary>
+	/// Represents a mode of the MonteCarlo Pure Search
+	/// </summary>
+	public interface IMode {}
 }

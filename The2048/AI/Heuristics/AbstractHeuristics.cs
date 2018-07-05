@@ -3,6 +3,9 @@
 	using System;
 	using Game;
 
+	/// <summary>
+	/// Basic functionality for heuristics.
+	/// </summary>
 	public abstract class AbstractHeuristics : IHeuristics
 	{
 		private double[] heuristicsTable;
@@ -12,6 +15,11 @@
 			this.heuristicsTable = heuristicsTable;
 		}
 
+		/// <summary>
+		/// Generates a heuristics table based on a given function that evaluates a single row of a board.
+		/// </summary>
+		/// <param name="rowEvaluation"></param>
+		/// <returns></returns>
 		protected double[] GenerateHeuristicsTable(Func<byte[], double> rowEvaluation)
 		{
 			var heuristicTable = new double[65536];
@@ -31,6 +39,7 @@
 			return heuristicTable;
 		}
 
+		/// <inheritdoc />
 		public double EvaluateState(ulong state)
 		{
 			double score = 0;
@@ -39,7 +48,7 @@
 			         + heuristicsTable[(state >> 16) & 0xFFFF]
 			         + heuristicsTable[(state >> 32) & 0xFFFF]
 			         + heuristicsTable[(state >> 48) & 0xFFFF];
-			state = Helpers.Transpose(state);
+			state = BoardStateHelpers.Transpose(state);
 			score += heuristicsTable[(state & 0xFFFF)]
 			         + heuristicsTable[(state >> 16) & 0xFFFF]
 			         + heuristicsTable[(state >> 32) & 0xFFFF]
