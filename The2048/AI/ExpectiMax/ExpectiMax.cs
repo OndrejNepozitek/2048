@@ -11,7 +11,7 @@
 	/// </summary>
 	public class ExpectiMax : ISolver
 	{
-		private readonly int maxDepth = 8;
+		private int maxDepth = 8;
 		private Dictionary<ulong, double> previouslySeenStates;
 		private readonly IBoard board = new Board();
 		private readonly IHeuristics heuristics = new Heuristics();
@@ -20,6 +20,11 @@
 		{
 			Move.Up, Move.Down, Move.Left, Move.Right
 		};
+
+		public ExpectiMax(int maxDepth)
+		{
+			this.maxDepth = maxDepth;
+		}
 
 		/// <inheritdoc />
 		public Move GetNextMove(ulong state)
