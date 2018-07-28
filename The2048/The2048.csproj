@@ -9,4 +9,10 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="BenchmarkUtils">
+      <HintPath>..\Libraries\BenchmarkUtils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -257,7 +257,7 @@
 
 					if (radioExpectimax.Checked)
 					{
-						currentSolver = new ExpectiMax((int) numericExpectimaxDepth.Value);
+						currentSolver = new ExpectiMax((int) numericExpectimaxDepth.Value, true, false);
 					} else if (radioMonteCarlo.Checked)
 					{
 						IMode mode = null;
@@ -340,6 +340,15 @@
 		private void numericLimitSimulationSpeed_ValueChanged(object sender, EventArgs e)
 		{
 			limitSimulationSpeedValue = (int)numericLimitSimulationSpeed.Value;
+		}
+
+		protected void HideControlsForBenchmark()
+		{
+			groupMonteCarlo.Hide();
+			groupExpectimax.Hide();
+			groupAI.Hide();
+			groupGeneralSettings.Hide();
+			groupActions.Hide();
 		}
 	}
 }

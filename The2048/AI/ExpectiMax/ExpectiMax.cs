@@ -12,6 +12,8 @@
 	public class ExpectiMax : ISolver
 	{
 		private int maxDepth = 8;
+		private readonly bool pruneLowProbs;
+		private readonly bool adaptiveDepth;
 		private Dictionary<ulong, double> previouslySeenStates;
 		private readonly IBoard board = new Board();
 		private readonly IHeuristics heuristics = new Heuristics();
@@ -21,15 +23,35 @@
 			Move.Up, Move.Down, Move.Left, Move.Right
 		};
 
-		public ExpectiMax(int maxDepth)
+		public ExpectiMax(int maxDepth, bool pruneLowProbs, bool adaptiveDepth)
 		{
 			this.maxDepth = maxDepth;
+			this.pruneLowProbs = pruneLowProbs;
+			this.adaptiveDepth = adaptiveDepth;
 		}
 
 		/// <inheritdoc />
 		public Move GetNextMove(ulong state)
 	    {
 			previouslySeenStates = new Dictionary<ulong, double>();
+
+		    if (adaptiveDepth)
+		    {
+			    var score = board.GetScore(state);
+
+			    if (score > 110000)
+			    {
+				    maxDepth = 10;
+			    }
+			    else if (score > 70000)
+			    {
+				    maxDepth = 8;
+			    }
+			    else
+			    {
+				    maxDepth = 6;
+			    }
+		    }
 
 		    var bestMove = Move.Undefined;
 		    var bestScore = double.MinValue;
@@ -72,20 +94,20 @@
 
 		    if (board.IsTerminal(state))
 		    {
-			    return EvaluateState(state);
+			    return EvaluateState(state, true);
 		    }
 
-			if (probability < 0.005)
+			if (pruneLowProbs && probability < 0.005)
 			{
 				return EvaluateState(state);
 			}
 
 			if (previouslySeenStates.TryGetValue(state, out var previouslySeenStateScore))
-		    {
-			    return previouslySeenStateScore;
-		    }
+			{
+				return previouslySeenStateScore;
+			}
 
-		    var score = depth % 2 == 0 ?
+			var score = depth % 2 == 0 ?
 			    EvaluateMoveNode(state, depth, probability) : 
 			    EvaluateRandomNode(state, depth, probability);
 
@@ -162,10 +184,16 @@
 		/// Evaluates a given state.
 		/// </summary>
 		/// <param name="state"></param>
+		/// <param name="isTerminal"></param>
 		/// <returns></returns>
-	    private double EvaluateState(ulong state)
+		private double EvaluateState(ulong state, bool? isTerminal = null)
 	    {
-		    return board.IsTerminal(state) ? 0 : heuristics.EvaluateState(state);
+		    if (!isTerminal.HasValue)
+		    {
+			    isTerminal = board.IsTerminal(state);
+		    }
+
+		    return isTerminal.Value ? 0 : heuristics.EvaluateState(state);
 	    }
     }
 }

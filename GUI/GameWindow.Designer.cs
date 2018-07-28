@@ -31,7 +31,7 @@
 			this.boardContainer = new System.Windows.Forms.Panel();
 			this.scoreLabel = new System.Windows.Forms.Label();
 			this.nameLabel = new System.Windows.Forms.Label();
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.groupAI = new System.Windows.Forms.GroupBox();
 			this.radioRandom = new System.Windows.Forms.RadioButton();
 			this.radioMonteCarlo = new System.Windows.Forms.RadioButton();
 			this.radioExpectimax = new System.Windows.Forms.RadioButton();
@@ -45,24 +45,24 @@
 			this.numericExpectimaxDepth = new System.Windows.Forms.NumericUpDown();
 			this.radioExpectimaxDepth = new System.Windows.Forms.RadioButton();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.groupActions = new System.Windows.Forms.GroupBox();
 			this.buttonPause = new System.Windows.Forms.Button();
 			this.buttonStop = new System.Windows.Forms.Button();
 			this.buttonStart = new System.Windows.Forms.Button();
-			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.groupGeneralSettings = new System.Windows.Forms.GroupBox();
 			this.numericLimitSimulationSpeed = new System.Windows.Forms.NumericUpDown();
 			this.label2 = new System.Windows.Forms.Label();
 			this.checkBoxLimitSimulationSpeed = new System.Windows.Forms.CheckBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.groupBox1.SuspendLayout();
+			this.groupAI.SuspendLayout();
 			this.groupMonteCarlo.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericMonteCarloTime)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericMonteCarloCount)).BeginInit();
 			this.groupExpectimax.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericExpectimaxDepth)).BeginInit();
 			this.panel1.SuspendLayout();
-			this.groupBox5.SuspendLayout();
-			this.groupBox4.SuspendLayout();
+			this.groupActions.SuspendLayout();
+			this.groupGeneralSettings.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericLimitSimulationSpeed)).BeginInit();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -91,22 +91,22 @@
 			this.nameLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.nameLabel.Location = new System.Drawing.Point(0, 394);
 			this.nameLabel.Name = "nameLabel";
-			this.nameLabel.Size = new System.Drawing.Size(330, 23);
+			this.nameLabel.Size = new System.Drawing.Size(330, 43);
 			this.nameLabel.TabIndex = 2;
-			this.nameLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// groupBox1
+			// groupAI
 			// 
-			this.groupBox1.Controls.Add(this.radioRandom);
-			this.groupBox1.Controls.Add(this.radioMonteCarlo);
-			this.groupBox1.Controls.Add(this.radioExpectimax);
-			this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.groupBox1.Location = new System.Drawing.Point(0, 123);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(330, 115);
-			this.groupBox1.TabIndex = 3;
-			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "AI type";
+			this.groupAI.Controls.Add(this.radioRandom);
+			this.groupAI.Controls.Add(this.radioMonteCarlo);
+			this.groupAI.Controls.Add(this.radioExpectimax);
+			this.groupAI.Dock = System.Windows.Forms.DockStyle.Top;
+			this.groupAI.Location = new System.Drawing.Point(0, 123);
+			this.groupAI.Name = "groupAI";
+			this.groupAI.Size = new System.Drawing.Size(330, 115);
+			this.groupAI.TabIndex = 3;
+			this.groupAI.TabStop = false;
+			this.groupAI.Text = "AI type";
 			// 
 			// radioRandom
 			// 
@@ -266,27 +266,27 @@
 			this.panel1.Controls.Add(this.nameLabel);
 			this.panel1.Controls.Add(this.groupExpectimax);
 			this.panel1.Controls.Add(this.groupMonteCarlo);
-			this.panel1.Controls.Add(this.groupBox1);
-			this.panel1.Controls.Add(this.groupBox4);
-			this.panel1.Controls.Add(this.groupBox5);
+			this.panel1.Controls.Add(this.groupAI);
+			this.panel1.Controls.Add(this.groupGeneralSettings);
+			this.panel1.Controls.Add(this.groupActions);
 			this.panel1.Location = new System.Drawing.Point(635, 101);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(330, 511);
 			this.panel1.TabIndex = 3;
 			// 
-			// groupBox5
+			// groupActions
 			// 
-			this.groupBox5.Controls.Add(this.buttonPause);
-			this.groupBox5.Controls.Add(this.buttonStop);
-			this.groupBox5.Controls.Add(this.buttonStart);
-			this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
-			this.groupBox5.Location = new System.Drawing.Point(0, 0);
-			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Padding = new System.Windows.Forms.Padding(8);
-			this.groupBox5.Size = new System.Drawing.Size(330, 63);
-			this.groupBox5.TabIndex = 7;
-			this.groupBox5.TabStop = false;
-			this.groupBox5.Text = "Actions";
+			this.groupActions.Controls.Add(this.buttonPause);
+			this.groupActions.Controls.Add(this.buttonStop);
+			this.groupActions.Controls.Add(this.buttonStart);
+			this.groupActions.Dock = System.Windows.Forms.DockStyle.Top;
+			this.groupActions.Location = new System.Drawing.Point(0, 0);
+			this.groupActions.Name = "groupActions";
+			this.groupActions.Padding = new System.Windows.Forms.Padding(8);
+			this.groupActions.Size = new System.Drawing.Size(330, 63);
+			this.groupActions.TabIndex = 7;
+			this.groupActions.TabStop = false;
+			this.groupActions.Text = "Actions";
 			// 
 			// buttonPause
 			// 
@@ -327,18 +327,18 @@
 			this.buttonStart.UseVisualStyleBackColor = true;
 			this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
 			// 
-			// groupBox4
+			// groupGeneralSettings
 			// 
-			this.groupBox4.Controls.Add(this.numericLimitSimulationSpeed);
-			this.groupBox4.Controls.Add(this.label2);
-			this.groupBox4.Controls.Add(this.checkBoxLimitSimulationSpeed);
-			this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
-			this.groupBox4.Location = new System.Drawing.Point(0, 63);
-			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(330, 60);
-			this.groupBox4.TabIndex = 6;
-			this.groupBox4.TabStop = false;
-			this.groupBox4.Text = "General settings";
+			this.groupGeneralSettings.Controls.Add(this.numericLimitSimulationSpeed);
+			this.groupGeneralSettings.Controls.Add(this.label2);
+			this.groupGeneralSettings.Controls.Add(this.checkBoxLimitSimulationSpeed);
+			this.groupGeneralSettings.Dock = System.Windows.Forms.DockStyle.Top;
+			this.groupGeneralSettings.Location = new System.Drawing.Point(0, 63);
+			this.groupGeneralSettings.Name = "groupGeneralSettings";
+			this.groupGeneralSettings.Size = new System.Drawing.Size(330, 60);
+			this.groupGeneralSettings.TabIndex = 6;
+			this.groupGeneralSettings.TabStop = false;
+			this.groupGeneralSettings.Text = "General settings";
 			// 
 			// numericLimitSimulationSpeed
 			// 
@@ -399,8 +399,8 @@
 			this.Name = "GameWindow";
 			this.Text = "GameWindow";
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameWindow_KeyUp);
-			this.groupBox1.ResumeLayout(false);
-			this.groupBox1.PerformLayout();
+			this.groupAI.ResumeLayout(false);
+			this.groupAI.PerformLayout();
 			this.groupMonteCarlo.ResumeLayout(false);
 			this.groupMonteCarlo.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericMonteCarloTime)).EndInit();
@@ -409,9 +409,9 @@
 			this.groupExpectimax.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericExpectimaxDepth)).EndInit();
 			this.panel1.ResumeLayout(false);
-			this.groupBox5.ResumeLayout(false);
-			this.groupBox4.ResumeLayout(false);
-			this.groupBox4.PerformLayout();
+			this.groupActions.ResumeLayout(false);
+			this.groupGeneralSettings.ResumeLayout(false);
+			this.groupGeneralSettings.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericLimitSimulationSpeed)).EndInit();
 			this.groupBox2.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -423,7 +423,7 @@
 		private System.Windows.Forms.Panel boardContainer;
 		private System.Windows.Forms.Label scoreLabel;
 		private System.Windows.Forms.Label nameLabel;
-		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.GroupBox groupAI;
 		private System.Windows.Forms.RadioButton radioExpectimax;
 		private System.Windows.Forms.RadioButton radioRandom;
 		private System.Windows.Forms.RadioButton radioMonteCarlo;
@@ -434,14 +434,14 @@
 		private System.Windows.Forms.GroupBox groupExpectimax;
 		private System.Windows.Forms.RadioButton radioExpectimaxDepth;
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.GroupBox groupBox4;
+		private System.Windows.Forms.GroupBox groupGeneralSettings;
 		private System.Windows.Forms.CheckBox checkBoxLimitSimulationSpeed;
 		private System.Windows.Forms.NumericUpDown numericMonteCarloTime;
 		private System.Windows.Forms.NumericUpDown numericMonteCarloCount;
 		private System.Windows.Forms.NumericUpDown numericExpectimaxDepth;
 		private System.Windows.Forms.NumericUpDown numericLimitSimulationSpeed;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.GroupBox groupBox5;
+		private System.Windows.Forms.GroupBox groupActions;
 		private System.Windows.Forms.Button buttonStart;
 		private System.Windows.Forms.Button buttonStop;
 		private System.Windows.Forms.Button buttonPause;

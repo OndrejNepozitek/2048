@@ -1,6 +1,7 @@
 ﻿namespace Sandbox
 {
 	using System;
+	using System.Collections.Generic;
 	using System.Diagnostics;
 	using System.Threading.Tasks;
 	using GUI;
@@ -15,6 +16,7 @@
 		public SandboxForm() : base(Mode.Readonly)
 		{
 			InitializeComponent();
+			HideControlsForBenchmark();
 			RunBenchmark();
 		}
 
@@ -25,16 +27,26 @@
 
 			Task.Run(() =>
 			{
+				var jobs = new List<BenchmarkJob>();
+
+				for (var i = 1; i < 10; i++)
+				{
+					jobs.Add(new BenchmarkJob($"MonteCarlo {i * 400} iters", new MonteCarloPureSearch(new FixedCountMode(i * 400)), 3));
+					// scenario.AddSetup($"MonteCarlo {i * 400} iters", new MonteCarloPureSearch(new TimeMode(50)));
+				}
+
+				for (var i = 2; i < 4; i++)
+				{
+					jobs.Add(new BenchmarkJob($"ExpectiMax d{2 * i}, nprune", new ExpectiMax(2 * i, false, false), 5));
+				}
+
+				for (var i = 2; i < 4; i++)
+				{
+					jobs.Add(new BenchmarkJob($"ExpectiMax d{2 * i}, prune", new ExpectiMax(2 * i, true, false),5));
+				}
+
 				var benchmark = new Benchmark();
-				var scenario = new BenchmarkScenario();
-
-				//for (var i = 1; i < 10; i++)
-				//{
-				//	scenario.AddSetup($"MonteCarlo {i * 400} iters", new MonteCarloPureSearch(new FixedCountMode(i * 400)));
-				//	// scenario.AddSetup($"MonteCarlo {i * 400} iters", new MonteCarloPureSearch(new TimeMode(50)));
-				//}
-
-				scenario.AddSetup("ExpectiMax", new ExpectiMax());
+				benchmark.AddFileOutput();
 
 				benchmark.OnSetupStarted += (name) =>
 				{
@@ -59,7 +71,9 @@
 					}
 				};
 
-				benchmark.Execute(scenario, 30);
+				//var job = new BenchmarkJob($"ExpectiMax d{2 * 3}, prune", new ExpectiMax(2 * 3, true, false), 5);
+
+				benchmark.Run(jobs.ToArray(), "2048 benchmark");
 			});
 		}
 	}
