@@ -1,5 +1,5 @@
 # 2048
-Optimized board operations and AI for the game 2048. Initially implemented as a school project.
+Optimized board operations, AI and GUI for the game 2048. Initially implemented as a school project.
 
 ## Features
 - 3 implemented AIs - ExpectiMax, MonteCarlo Pure Search and RandomAI
