@@ -10,7 +10,7 @@ Optimized board operations, AI and GUI for the game 2048. Initially implemented 
 
 ## How to setup
 - run the GUI with **GUI.exe** (.NET Framework 4.6.1) **or**
-- include the **The2048.dll** (.NET Standard 2.0 dll)
+- include the **The2048.dll** together with the **BenchmarkUtils.dll** (both .NET Standard 2.0 dlls)
 
 ## How to use
 The `IBoard` interface and its `Board` implementation provide everything to create your own AI.
